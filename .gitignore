@@ -1,0 +1,64 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+# Compiled output
+dist/
+out-tsc/
+build/
+
+# Angular specific
+.angular/
+.angular-cache/
+
+# Environment files
+src/environments/*.ts
+
+# Angular build cache
+.angular/cache/
+
+# Logs
+logs/
+*.log
+
+# IDEs and editors
+.idea/
+.vscode/
+.project
+.DS_Store
+*.sublime*
+
+# Compiled files
+*.dll
+*.exe
+*.so
+*.dylib
+
+# Temporary files
+temp/
+tmp/
+~$*
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Coverage and test reports
+coverage/
+*.lcov
+test-results/
+.karma/
+.nyc_output/
+
+# Miscellaneous
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+Thumbs.db
+.sass-cache/
+*.psd
+*.iml
