@@ -1,0 +1,50 @@
+.header-content {
+   justify-content: space-between;
+   align-items: center;
+   background-color: white;
+   padding: 0;
+   .nav-logo {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 10px;
+      .avatar {
+         width: 60px;
+         border-radius: 50%;
+      }
+      .page-name {
+         font-weight: bold;
+         cursor: pointer;
+      }
+   }
+   .nav-links {
+      justify-content: center;
+      align-items: center;
+      .nav-items-link {
+         font-size: 1.25rem;
+         cursor: pointer;
+         transition: color 0.3s ease;
+         &:hover {
+            color: rgb(248, 165, 179);
+            background-color: white;
+         }
+      }
+   }
+   .nav-end {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .nav-notification {
+         display: flex;
+         cursor: pointer;
+         justify-content: space-around;
+      }
+      .nav-user {
+         display: flex;
+         cursor: pointer;
+         justify-content: start;
+         align-items: center;
+         gap: 10px;
+      }
+   }
+}

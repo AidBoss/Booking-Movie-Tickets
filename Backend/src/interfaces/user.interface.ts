@@ -9,6 +9,7 @@ export interface IUser extends Document {
    role: string;
    status: boolean;
    deleted: boolean;
+   isLocked: boolean;
    createdAt: Date;
    updatedAt: Date;
 }
