@@ -1,0 +1,14 @@
+<div class="nav-city">
+   <span [matMenuTriggerFor]="changeCity">Hồ Chí Minh</span>
+   <mat-icon>arrow_drop_down</mat-icon>
+   <mat-menu #changeCity="matMenu" xPosition="before" class="" xPosition="before">
+      <button mat-menu-item>
+         <span class="flag-icon flag-icon-us"></span>
+         Hà Nội
+      </button>
+      <button mat-menu-item>
+         <span class="flag-icon flag-icon-vn"></span>
+         Hồ Chí Minh
+      </button>
+   </mat-menu>
+</div>

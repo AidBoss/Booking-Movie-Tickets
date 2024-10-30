@@ -1,0 +1,27 @@
+<form (ngSubmit)="onSubmit()" #signInForm="ngForm">
+   <h1>Sign in</h1>
+   <div class="social-container">
+      <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+      <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+   </div>
+   <span>or use your account</span>
+   <div class="np-from">
+      <mat-form-field appearance="outline">
+         <mat-label>Outline form field</mat-label>
+         <input matInput placeholder="Placeholder">
+         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+         <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+   </div>
+   <div class="from-group d-flex w-100 justify-content-start">
+      <div class="half">
+         <input id="remember" type="checkbox">
+         <label for="remember" class="text-nowrap">remember me!</label>
+      </div>
+      <div class="bottom">
+         <a href="#">Forgot your password?</a>
+      </div>
+   </div>
+   <button type="submit">Sign In</button>
+</form>

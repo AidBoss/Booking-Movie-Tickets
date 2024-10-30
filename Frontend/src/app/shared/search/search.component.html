@@ -1,6 +1,932 @@
-<form class="example-form">
-   <input class="form-control position-relative" type="text" placeholder="Search your favorite movies">
-   <button class="btn-search position-absolute">
-      <mat-icon>search</mat-icon>
-   </button>
-</form>
+<div class="nav-item">
+   <button type="type" (click)="showSearch()" ngDefaultControl class="border-0 bg-white"><i
+         class="fas fa-search"></i></button>
+</div>
+<div class="show-box-search" id="show-box-search" [ngClass]="{'d-flex animate-search':btn_shows}">
+   <div class="search-form" id="search-form" *ngIf="btn_shows">
+      <div class="form-content">
+         <div class="search-input">
+            <div class="back" (click)="showSearch()">
+               <i class="fas fa-angle-left"></i>
+            </div>
+            <div class="input-s">
+               <input (input)="onInputChange($event)" type="search" id="search"
+                  class="inSearch w-100 shadow p-3 bg-body rounded border-0" title="search movies">
+               <ul *ngIf="showLsRs" id="result-search" class="result-search shadow bg-body-tertiary rounded">
+                  <li class="items-result">
+                     <div class="img-movie">
+                        <img src="assets/img/poster-film.png" alt="">
+                     </div>
+                     <div class="infor-movie">
+                        <div class="name-movie">
+                           The Pursuit Of Happyness
+                        </div>
+                        <div class="date-launch">
+                           Date show: 20/12/2024
+                        </div>
+                        <div class="year-derected">
+                           Year derected: 2006
+                        </div>
+                     </div>
+                     <div class="price-ticket text-end">
+                        <div class="old-price">20$</div>
+                        <div class="new-price">12$</div>
+                     </div>
+                  </li>
+                  <li class="items-result">
+                     <div class="img-movie">
+                        <img src="assets/img/poster-film.png" alt="">
+                     </div>
+                     <div class="infor-movie">
+                        <div class="name-movie">
+                           The Pursuit Of Happyness
+                        </div>
+                        <div class="date-launch">
+                           Date show: 20/12/2024
+                        </div>
+                        <div class="year-derected">
+                           Year derected: 2006
+                        </div>
+                     </div>
+                     <div class="price-ticket text-end">
+                        <div class="old-price">20$</div>
+                        <div class="new-price">12$</div>
+                     </div>
+                  </li>
+                  <li class="items-result">
+                     <div class="img-movie">
+                        <img src="assets/img/poster-film.png" alt="">
+                     </div>
+                     <div class="infor-movie">
+                        <div class="name-movie">
+                           The Pursuit Of Happyness
+                        </div>
+                        <div class="date-launch">
+                           Date show: 20/12/2024
+                        </div>
+                        <div class="year-derected">
+                           Year derected: 2006
+                        </div>
+                     </div>
+                     <div class="price-ticket text-end">
+                        <div class="old-price">20$</div>
+                        <div class="new-price">12$</div>
+                     </div>
+                  </li>
+                  <li class="items-result">
+                     <div class="img-movie">
+                        <img src="assets/img/poster-film.png" alt="">
+                     </div>
+                     <div class="infor-movie">
+                        <div class="name-movie">
+                           The Pursuit Of Happyness
+                        </div>
+                        <div class="date-launch">
+                           Date show: 20/12/2024
+                        </div>
+                        <div class="year-derected">
+                           Year derected: 2006
+                        </div>
+                     </div>
+                     <div class="price-ticket text-end">
+                        <div class="old-price">20$</div>
+                        <div class="new-price">12$</div>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <div class="close" (click)="showSearch()">
+               <i class="far fa-times-circle"></i>
+            </div>
+         </div>
+         <mat-tab-group>
+            <mat-tab label="Movies">
+               <div class="category-search w-100">
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ">
+                     <div class="title-cate">
+                        <mat-icon>category</mat-icon>
+                        <span> Thể loại</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim ảnh</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim ưu tiên</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim hành động</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim kinh dị</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim võ thuật</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim tâm lý</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim chính trị</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Phim thiếu nhi</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ">
+                     <div class="title-cate">
+                        <mat-icon>local_fire_department</mat-icon>
+                        <span>Phim hot nhất</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Pursuit Of Happyness</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Inception</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Dark Knight</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Godfather</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Shawshank Redemption</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Eternal Sunshine of the Spotless
+                              Mind</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Casablanca</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Schindler's List</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ">
+                     <div class="title-cate">
+                        <mat-icon>fiber_new</mat-icon>
+                        <span>Phim mới</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Pursuit Of Happyness</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Inception</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Dark Knight</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Godfather</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> The Shawshank Redemption</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Eternal Sunshine of the Spotless
+                              Mind</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Casablanca</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Schindler's List</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ">
+                     <div class="title-cate">
+                        <mat-icon>rocket_launch</mat-icon>
+                        <span>Giảm giá vé phim</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Giảm giá 10% đến 20/12/2024</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Giảm giá 20% đến 25/12/2024</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="far fa-heart"></i> Giảm giá 30% đến 30/01/2025</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </mat-tab>
+            <mat-tab label="Cinemas">
+               <div class="category-search w-100">
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hà Nội</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hồ Chí Minh</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Quảng Ninh</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hải Phòng</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hải Phòng</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hải Phòng</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hải Phòng</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6 col-xl-3 col-12 col-md-6 ls-cate ls-it-tab2 ">
+                     <div class="title-cate">
+                        <mat-icon>apartment</mat-icon>
+                        <span>Hải Phòng</span>
+                     </div>
+                     <ul class="list-cate">
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Nexus
+                              Seawoods, Navi Mumbai</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Cinepolis: Viviana Mall,
+                              Thane</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> Maxus Cinemas:
+                              Bhayander</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: Megaplex, Inorbit
+                              Mall, Malad</a>
+                        </li>
+                        <li class="item-cate">
+                           <a class="it-detail" href="#"><i class="fas fa-map-marker-alt"></i> INOX: R-City,
+                              Ghatkopar</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </mat-tab>
+         </mat-tab-group>
+      </div>
+   </div>

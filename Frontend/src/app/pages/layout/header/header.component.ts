@@ -10,8 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from '../../../shared/menu-mobile/menu.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
-// import { NgxSelectDropdownModule } from 'ngx-select-dropdown';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { SelectCityComponent } from '../../../shared/select-city/select-city.component';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -22,17 +24,21 @@ import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
     FormsModule,
     MatButtonModule,
     MatIconModule,
+    CommonModule,
     RouterModule,
     SearchComponent,
     MatBadgeModule,
+    MatSelectModule,
     MenuComponent,
     MatMenuModule,
     NgxBootstrapIconsModule,
-
+    SelectCityComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-
+  checkLogin: boolean = false;
+  checkLanguages: boolean = false;
+  Languages = ['en', 'vn']
 } 
