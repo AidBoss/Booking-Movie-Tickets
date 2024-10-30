@@ -4,7 +4,7 @@ import connection from "./config/database.config";
 import routerAPI from "./router/api";
 
 const app: Application = express();
-const port: number = Number(process.env.PORT) || 8888;
+const port: number = Number(process.env.PORT) || 9999;
 const localhost: string = process.env.HOST_NAME || "localhost";
 
 // Configure view engine

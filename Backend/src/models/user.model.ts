@@ -15,5 +15,10 @@ const UserSchema = new Schema<IUser>({
    updatedAt: { type: Date, default: Date.now },
 });
 
+UserSchema.pre('save', function (next) {
+   this.updatedAt = new Date();
+   next();
+});
+
 // Export model
 export default model<IUser>("User", UserSchema);

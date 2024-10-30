@@ -1,12 +1,25 @@
+import { IUser } from "./user.interface";
+
 export interface Ilogin {
    username: string;
    password: string;
 }
-export interface IRegiter {
+export interface IloginResponse {
+   status: number;
+   message: string;
+   user?: IUser;
+   token?: string;
+}
+export interface IRegister {
    fullname: string;
    username: string;
+   password: string;
    email: string;
    phone: string;
-   password: string;
-   repass: string;
+   role: string;
+}
+export interface IRegisterResponse {
+   status: number;
+   message: string;
+   user?: IUser;
 }

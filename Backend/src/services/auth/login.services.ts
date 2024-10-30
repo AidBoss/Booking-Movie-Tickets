@@ -1,27 +1,37 @@
-import { Ilogin } from '../../interfaces/auth.interface';
+import { Ilogin, IloginResponse } from './../../interfaces/auth.interface';
 import User from "../../models/user.model";
 import bcrypt from 'bcrypt';
-import { LoginError } from "../../emun/auth.enum";
+import logger from '../../logs/log.errors';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const loginServices = async (user: Ilogin): Promise<Ilogin | LoginError> => {
+const SECRET_KEY = process.env.JWT_SECRET || 'aidboss-i-love-you';
+const loginServices = async (user: Ilogin): Promise<IloginResponse | null> => {
    const { username, password } = user;
    try {
-      // Tìm người dùng với kiểu IUser
-      const foundUser = (await User.findOne({ username }));
+      const foundUser = await User.findOne({ username });
       if (!foundUser) {
-         return LoginError.InvalidCredentials; // Không tìm thấy user
+         return { status: 404, message: 'Người dùng chưa đăng ký' };
       }
       const isMatch = await bcrypt.compare(password, foundUser.password);
       if (!isMatch) {
-         return LoginError.InvalidCredentials; // Mật khẩu không đúng
+         return { status: 403, message: 'Tài khoản hoặc mật khẩu sai' };
       }
-      if (foundUser.isLocked) {
-         return LoginError.AccountLocked;  // Tài khoản bị khóa
-      }
-      // Nếu tất cả điều kiện đúng, trả về thông tin người dùng
-      return foundUser;
-   } catch (error) {
-      throw new Error("Lỗi trong khi đăng nhập");
+      const token_login = jwt.sign(
+         { userId: foundUser._id, role: foundUser.role },
+         SECRET_KEY,
+         { expiresIn: '1h' }
+      );
+      return {
+         status: 200,
+         message: 'Đăng nhập thành công',
+         user: foundUser,
+         token: token_login,
+      };
+   } catch (error: any) {
+      logger.error(`Lỗi khi đăng ký: ${error.message}`);
+      return { status: 500, message: 'Lỗi server' };
    }
 };
 

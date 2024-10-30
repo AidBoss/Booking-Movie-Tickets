@@ -42,7 +42,7 @@ const connection = async (): Promise<void> => {
       };
 
       // Kết nối tới MongoDB
-      await mongoose.connect(process.env.DB_HOST || '8888', options);
+      await mongoose.connect(process.env.DB_HOST || '9999', options);
 
       // Lấy trạng thái kết nối
       const state = Number(mongoose.connection.readyState);
