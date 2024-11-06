@@ -1,0 +1,46 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h1>Đăng Ký</h1>
+  <div class="social-container mb-0">
+    <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+  </div>
+  <div class="np-from">
+    <input class="form-control" formControlName="fullname" type="text" placeholder="Name" required/>
+    <div *ngIf="(registerForm.get('fullname')?.touched || registerForm.get('fullname')?.dirty) && registerForm.get('fullname')?.invalid" class="text-danger w-100">
+      <small>{{ getError('fullname') }}</small>
+    </div>
+  </div>
+  <div class="np-from">
+    <input class="form-control" formControlName="username" type="text" placeholder="Username" required/>
+    <div *ngIf="(registerForm.get('username')?.touched || registerForm.get('username')?.dirty) && registerForm.get('username')?.invalid" class="text-danger w-100">
+      <small>{{ getError('username') }}</small>
+    </div>
+  </div>
+  <div class="np-from">
+    <input class="form-control" formControlName="email" type="email" placeholder="Email" required/>
+    <div *ngIf="(registerForm.get('email')?.touched || registerForm.get('email')?.dirty) && registerForm.get('email')?.invalid" class="text-danger w-100">
+      <small>{{ getError('email') }}</small>
+    </div>
+  </div>
+  <div class="np-from">
+    <input class="form-control" formControlName="phone" type="text" placeholder="Phone" required/>
+    <div *ngIf="(registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty) && registerForm.get('phone')?.invalid" class="text-danger w-100">
+      <small>{{ getError('phone') }}</small>
+    </div>
+  </div>
+  <div class="pw-formGroup w-100" formGroupName="pw">
+    <div class="np-from w-100">
+      <input class="form-control" formControlName="password" type="password" placeholder="Password" required/>
+      <div *ngIf="(registerForm.get('pw.password')?.touched || registerForm.get('pw.password')?.dirty) && registerForm.get('pw.password')?.invalid" class="text-danger w-100">
+        <small>{{ getError('pw.password') }}</small>
+      </div>
+    </div>
+    <div class="np-from w-100">
+      <input class="form-control" formControlName="confirmPassword" type="password" placeholder="Confirm Password" required/>
+      <div *ngIf="(registerForm.get('pw.confirmPassword')?.touched || registerForm.get('pw.confirmPassword')?.dirty) && registerForm.get('pw.confirmPassword')?.invalid" class="text-danger w-100">
+        <small>{{ getError('pw.confirmPassword') }}</small>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-submit mt-2" type="submit">Đăng Ký</button>
+
+</form>
