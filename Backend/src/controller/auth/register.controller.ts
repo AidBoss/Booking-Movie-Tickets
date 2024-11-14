@@ -13,7 +13,6 @@ const registerController = async (req: Request, res: Response): Promise<void> =>
          })
       }
    } catch (error: any) {
-      console.error("Lỗi đăng ký:", error);
       res.status(500).json({
          status: "error",
          message: "Lỗi trong quá trình đăng ký!"
