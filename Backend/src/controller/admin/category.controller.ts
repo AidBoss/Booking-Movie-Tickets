@@ -5,6 +5,7 @@ import { ICategoryCreate } from "../../interfaces/category.interface";
 
 const getAllCategory = async (req: Request, res: Response): Promise<void> => {
    const result = await categoryServices.getAllCategory();
+
    res.status(result.status).json({ message: result.message, data: result.data });
 };
 
@@ -15,13 +16,13 @@ const getCategoryById = async (req: Request, res: Response): Promise<void> => {
       return;
    }
    const result = await categoryServices.getCategoryById(categoryId);
-   res.status(result.status).json({ message: result.message, category: result.category });
+   res.status(result.status).json({ message: result.message, data: result.data });
 };
 
 const createCategory = async (req: Request, res: Response): Promise<void> => {
    const { name, description }: ICategoryCreate = req.body;
    const result = await categoryServices.createCategory({ name, description });
-   res.status(result.status).json({ message: result.message, category: result.category });
+   res.status(result.status).json({ message: result.message, data: result.data });
 };
 
 const updateCategoryById = async (req: Request, res: Response): Promise<void> => {
@@ -32,7 +33,7 @@ const updateCategoryById = async (req: Request, res: Response): Promise<void> =>
    }
    const { name, description }: ICategoryCreate = req.body;
    const result = await categoryServices.updateCategory(categoryId, { name, description });
-   res.status(result.status).json({ message: result.message, category: result.category });
+   res.status(result.status).json({ message: result.message, data: result.data });
 };
 
 const deleteCategoryById = async (req: Request, res: Response): Promise<void> => {

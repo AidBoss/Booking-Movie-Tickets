@@ -1,0 +1,11 @@
+table td,
+table th {
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+
+.mask-custom {
+   backdrop-filter: blur(25px);
+   background-clip: padding-box;
+}

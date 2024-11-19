@@ -1,11 +1,11 @@
 import { Document } from "mongoose";
-
 export interface IMovie extends Document {
    title: string;
    description: string;
    duration: number;
    genre: string;
-   durantion: number;
+   director: string;
+   studio: string;
    releaseDate: Date;
    createdAt?: Date;
    updatedAt?: Date;
@@ -16,6 +16,8 @@ export interface IMovieCreate {
    description: string;
    duration: number;
    genre: string;
+   director: string;
+   studio: string;
    releaseDate: Date;
 }
 
@@ -23,6 +25,5 @@ export interface IMovieResponse {
    status: number;
    message: string;
    data?: IMovie[];
-   movie?: IMovie;
    deletedCount?: number;
 }

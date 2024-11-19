@@ -1,0 +1,16 @@
+.admin-container {
+   background: #fff;
+   min-height: 100vh;
+   transition: all 0.5s;
+   color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+   .admin-container {
+      // margin: calc(var(--header-height) + 1rem) 0 0 0;
+      padding-left: var(--nav-width);
+   }
+   .body-pd {
+      padding-left: calc(var(--nav-width) + 156px);
+   }
+}

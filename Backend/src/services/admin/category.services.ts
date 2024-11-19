@@ -1,8 +1,7 @@
-import { ICategory, ICategoryResponse, ICategoryCreate } from "../../interfaces/category.interface";
+import { ICategoryResponse, ICategoryCreate } from "../../interfaces/category.interface";
 import Category from "../../models/category.model";
 import mongoose from "mongoose";
 import logger from "../../logs/log.errors";
-import movieCategory from "../../models/movie-category.model";
 
 // hàm check id 
 const isValidObjectId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);
@@ -39,7 +38,7 @@ const getCategoryById = async (categoryId: string): Promise<ICategoryResponse> =
          return {
             status: 200,
             message: 'Lấy thể loại phim theo ID thành công',
-            category: result,
+            data: [result],
          };
       } else {
          return { status: 404, message: 'Không tìm thấy thể loại phim' };
@@ -67,7 +66,7 @@ const createCategory = async (cate: ICategoryCreate): Promise<ICategoryResponse>
       return {
          status: 200,
          message: 'Tạo thể loại phim thành công',
-         category: savedCate,
+         data: [savedCate],
       };
    } catch (error: any) {
       logger.error(`Lỗi khi tạo thể loại phim: ${error.message}`);
@@ -105,7 +104,7 @@ const updateCategory = async (id: string, cate: ICategoryCreate): Promise<ICateg
          return {
             status: 200,
             message: 'Cập nhật thể loại phim thành công',
-            category: result,
+            data: [result],
          };
       } else {
          return { status: 404, message: 'Không tìm thấy thể loại phim để cập nhật' };

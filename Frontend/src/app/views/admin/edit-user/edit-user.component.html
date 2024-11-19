@@ -1,0 +1,52 @@
+<div class="container-fluid rounded bg-white">
+      <div class="row">
+            <div class="col-md-3 border-right">
+                  <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle mt-5"
+                              width="150px"
+                              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                              class="font-weight-bold">Edogaru</span><span
+                              class="text-black-50">edogaru>mail.com.my</span><span>
+                        </span></div>
+            </div>
+            <div *ngFor="let u of user" class="col-md-5 border-right">
+                  <div class="d-flex justify-content-between align-items-center mb-2 mt-2">
+                        <h4 class="text-right text-success">Profile Settings</h4>
+                  </div>
+                  <div class="row mt-1">
+                        <div class="col-md-6"><label class="labels">full name</label><input type="text"
+                                    class="form-control" placeholder="{{u.fullname}}" value="{{u.fullname}}"></div>
+                        <div class="col-md-6"><label class="labels">User name</label><input type="text"
+                                    class="form-control" value="{{u.username}}" placeholder="{{u.username}}"></div>
+                  </div>
+                  <div class="row mt-3">
+                        <div class="mb-2 col-md-12"><label class="labels">Email</label><input type="text"
+                                    class="form-control" placeholder="{{u.email}}" value="{{u.email}}"></div>
+                        <div class="mb-2 col-md-12"><label class="labels">Phone</label><input type="text"
+                                    class="form-control" placeholder="{{u.phone}}" value="{{u.phone}}"></div>
+                        <div class="mb-2 col-md-12">
+                              <!-- <select2></select2> -->
+                        </div>
+                        <div class="mb-2 col-md-12"><label class="labels">District</label><input type="text"
+                                    class="form-control" placeholder="District" value=""></div>
+                        <div class="mb-2 col-md-12"><label class="labels">Agency</label><input type="text"
+                                    class="form-control" placeholder="Agency" value=""></div>
+                        <div class="mb-2 col-md-12"><label class="labels">Role</label><input type="text"
+                                    class="form-control" placeholder="Role" value=""></div>
+                        <div class="mb-2 col-md-12"><label class="labels">Deleted</label><input type="text"
+                                    class="form-control" placeholder="Deleted" value=""></div>
+                  </div>
+                  <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save
+                              Profile</button></div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center flex-column gap-5">
+                  <div class="d-flex justify-content-center align-items-center text-dark">
+                        <span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span>
+                  </div>
+                  <a routerLink="/admin/dashboard"
+                        class="btn d-flex justify-content-center align-items-center text-dark">
+                        <span class="border px-3 p-1 add-experience"><i class="fa-solid fa-arrow-left"></i>&nbsp;Go
+                              back</span>
+                  </a>
+            </div>
+      </div>
+</div>

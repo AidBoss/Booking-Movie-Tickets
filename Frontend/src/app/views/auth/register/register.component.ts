@@ -1,9 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {register_inter} from "../../../core/models/auth.model";
-import {authService} from "../../../core/services/auth/authService";
-import {Router} from "@angular/router";
-import {HttpErrorResponse} from "@angular/common/http";
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { register_inter } from "../../../core/models/auth.model";
+import { AuthService } from "../../../core/services/api/auth.service";
+import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-register',
@@ -13,27 +13,27 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
-  authService = inject(authService)
+  authService = inject(AuthService)
   router = inject(Router)
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       fullname: ['', [Validators.required]],
-      username: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$')]],
+      username: ['', [Validators.required, Validators.minLength(5),]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^\\d{10,11}$')]],
       pw: this.fb.group({
-        password: ['', [Validators.required, Validators.minLength(6)]],
+        password: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$')]],
         confirmPassword: ['', [Validators.required]]
       })
-    }, {validator: this.passwordMatchValidator});
+    }, { validator: this.passwordMatchValidator });
   }
 
   ngOnInit(): void {
   }
 
   passwordMatchValidator(form: FormGroup) {
-    return form.get('pw.password')?.value === form.get('pw.confirmPassword')?.value ? null : {'mismatch': true};
+    return form.get('pw.password')?.value === form.get('pw.confirmPassword')?.value ? null : { 'mismatch': true };
   }
 
   getError(controlName: string): string {
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const formValue= this.registerForm.value;
+      const formValue = this.registerForm.value;
       const data: register_inter = {
         fullname: formValue.fullname,
         username: formValue.username,
@@ -64,14 +64,12 @@ export class RegisterComponent implements OnInit {
         phone: formValue.phone,
         password: formValue.pw.password
       };
-      console.log(data)
       this.authService.register(data).subscribe({
-        next: (response) => {
+        next: () => {
           this.router.navigate(['/login']);
           this.errorMessage = "Bạn đã đăng ký thành công"
         },
-        error: (error:HttpErrorResponse) => {
-          console.log(error);
+        error: (error: HttpErrorResponse) => {
           this.errorMessage = error.error.message;
         }
       })

@@ -1,7 +1,7 @@
 export interface api_response<T> {
   message?: string;
-  token?: string;
-  data?: T;
-
+  data?: T[];
+  accessToken?: string;
+  refreshToken?: string;
 }
 

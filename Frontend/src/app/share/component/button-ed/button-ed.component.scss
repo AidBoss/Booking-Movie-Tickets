@@ -1,0 +1,25 @@
+.select-action {
+   position: relative;
+   .action-sc {
+      text-decoration: none;
+      color: #000;
+   }
+   .form-action {
+      display: flex;
+      position: absolute;
+      left: 0;
+      min-width: 100%;
+      top: 100%;
+      padding: 0.5rem 1rem;
+      background-color: #ccc;
+      border: none;
+      cursor: pointer;
+      z-index: 200;
+      transition: 0.3s;
+      flex-direction: column;
+      width: fit-content;
+      &:hover {
+         background-color: #bbb;
+      }
+   }
+}

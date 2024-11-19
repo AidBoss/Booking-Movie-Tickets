@@ -1,5 +1,4 @@
 import { Document } from "mongoose";
-// Định nghĩa interface IUser
 export interface IUser extends Document {
    username: string;
    password: string;
@@ -18,7 +17,6 @@ export interface IUserResponse {
    status: number;
    message: string;
    data?: IUser[];
-   user?: IUser;
 }
 export interface IUserUpdate {
    fullname?: string;

@@ -1,11 +1,6 @@
-<div class="admin-container">
-  <nav class="sidebar">
-    <ul>
-      <li><a routerLink="dashboard">Dashboard</a></li>
-      <li><a routerLink="manager-product">Manager Product</a></li>
-    </ul>
-  </nav>
-  <main class="main-content">
+<div class="admin-container" id="admin-container">
+  <app-sidebar></app-sidebar>
+  <main class="main-content w-100">
     <router-outlet></router-outlet>
   </main>
 </div>

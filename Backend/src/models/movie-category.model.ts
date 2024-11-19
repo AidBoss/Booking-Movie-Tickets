@@ -16,14 +16,15 @@ const MovieCategorySchema = new Schema<IMovieCategory>({
    updatedAt: { type: Date, default: Date.now }
 });
 // Middleware xóa các bản ghi liên quan khi xóa thể loại
-MovieCategorySchema.pre('deleteMany', async function (next) {
-   if (this.getQuery().categoryId) {
-      const categoryId = this.getQuery().categoryId;
-      // Xóa các bản ghi liên quan trong MovieCategory khi categoryId bị xóa
-      await model("MovieCategory").deleteMany({ categoryId });
-   }
-   next();
-});
+// MovieCategorySchema.pre('deleteMany', async function (next) {
+//    if (this.getQuery().categoryId) {
+//       const categoryId = this.getQuery().categoryId;
+//       // Xóa các bản ghi liên quan trong MovieCategory khi categoryId bị xóa
+//       await model("MovieCategory").deleteMany({ categoryId });
+//    }
+//    next();
+
+// });
 MovieCategorySchema.pre('save', function (next) {
    this.updatedAt = new Date();
    next();

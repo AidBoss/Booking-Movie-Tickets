@@ -9,9 +9,9 @@ const routes: Routes = [
     path: '',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent, data: { isSignUp: false }},
-      { path: 'register', component: RegisterComponent, data: { isSignUp: true }},
-      { path: '', redirectTo: 'login', pathMatch: 'full' }
+      { path: 'login', component: LoginComponent, data: { isSignUp: false } },
+      { path: 'register', component: RegisterComponent, data: { isSignUp: true } },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ]
   },
   { path: '**', redirectTo: 'login' }

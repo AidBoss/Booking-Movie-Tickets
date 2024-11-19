@@ -8,7 +8,8 @@ export interface IloginResponse {
    status: number;
    message: string;
    user?: IUser;
-   token?: string;
+   accessToken?: string;
+   refreshToken?: {};
 }
 export interface IRegister {
    fullname: string;

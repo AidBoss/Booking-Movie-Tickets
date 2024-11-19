@@ -1,28 +1,24 @@
-import {Component, OnInit, inject} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {login_inter} from "../../../core/models/auth.model";
-import {authService} from "../../../core/services/auth/authService";
-import {Router} from "@angular/router";
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { login_inter } from "../../../core/models/auth.model";
+import { AuthService } from "../../../core/services/api/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
-  authService = inject(authService);
+  authService = inject(AuthService);
   router = inject(Router);
-
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$')]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$')]],
     });
-  }
-
-  ngOnInit(): void {
   }
 
   getError(controlName: string): string {
@@ -43,15 +39,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const loginData: login_inter = this.loginForm.value;
       this.authService.login(loginData).subscribe({
-        next: (response) => {
-          console.log('Login response:', response);
-          if (response.token) {
-            localStorage.setItem('USER_TOKEN', response.token);
-          }
-          this.router.navigate(['/admin']);
-        },
+        next: () => this.router.navigate(['/admin']),
         error: (error: any) => {
-          this.errorMessage = error.error.message;
+          this.errorMessage = error.error;
         }
       });
     } else {

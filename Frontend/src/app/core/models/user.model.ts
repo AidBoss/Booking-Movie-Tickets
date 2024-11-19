@@ -3,12 +3,22 @@ export interface User {
   username: string;
   password: string;
   email: string;
-  name: string;
+  fullname: string;
   phone: string;
   role: string;
+  address: string;
   status: boolean;
-  deleted: boolean;
-  isLocked: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+export interface IUser {
+  _id: string;
+  fullname?: string;
+  username?: string;
+  password?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  status?: boolean;
+  role?: string;
 }

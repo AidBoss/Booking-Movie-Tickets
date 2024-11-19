@@ -1,16 +1,19 @@
 import express from "express";
 const routerAPI = express.Router();
-import loginController from "../controller/auth/login.controller";
-import registerController from "../controller/auth/register.controller";
 import managerUserController from "../controller/admin/user.controller";
 import { authenticateToken, middlewareUser } from "../Middleware/auth.middleware";
 import categoryController from "../controller/admin/category.controller";
+import refreshTokenController from "../controller/auth/refreshToken.controller";
+import authController from "../controller/auth/auth.controller";
 
 // router login, register
-routerAPI.post('/login', loginController);
+routerAPI.post('/login', authController.loginController);
 
-routerAPI.post('/register', registerController);
+routerAPI.post('/register', authController.registerController);
+// Làm mới Access Token
+routerAPI.post('/refresh-token', refreshTokenController)
 
+routerAPI.post('/logout', authController.logoutController)
 // router người quản trị
 
 routerAPI.use('/admin', authenticateToken);
@@ -21,7 +24,9 @@ routerAPI.get('/admin/user/:id', managerUserController.getUserById);
 
 routerAPI.put('/admin/user/:id', managerUserController.updateUser)
 
-routerAPI.patch('/admin/user/:id', managerUserController.deleteUser)
+routerAPI.patch('/admin/user/:id', managerUserController.LockUser)
+
+routerAPI.delete('/admin/user/:id', managerUserController.deleteUser)
 
 // Lấy tất cả danh sách thể loại phim
 routerAPI.get('/admin/category', categoryController.getAllCategory);

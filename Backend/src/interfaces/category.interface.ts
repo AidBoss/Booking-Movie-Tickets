@@ -17,6 +17,5 @@ export interface ICategoryResponse {
    status: number;
    message: string;
    data?: ICategory[];
-   category?: ICategory;
    deletedCount?: number;
 }

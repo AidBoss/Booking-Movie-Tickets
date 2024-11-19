@@ -5,9 +5,11 @@ import reviewModel from "./review.model";
 
 const MovieSchema = new Schema<IMovie>({
    title: { type: String, required: true },
-   description: { type: String, required: true },
+   description: { type: String },
    durantion: { type: Number, required: true },
    releaseDate: { type: Date, required: true },
+   director: { type: String, required: true },
+   studio: { type: String, required: true },
    createdAt: { type: Date, default: Date.now },
    updatedAt: { type: Date, default: Date.now },
 })
