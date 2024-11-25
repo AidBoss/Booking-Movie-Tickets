@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import movieServices from '../../services/admin/movie.services';
-import { IMovie, IMovieCreate } from '../../interfaces/movie.interface';
+import { IMovie, IMovieCreate } from '../../dto/movie.dto';
 
 
 const getAllMovie = async (req: Request, res: Response): Promise<void> => {

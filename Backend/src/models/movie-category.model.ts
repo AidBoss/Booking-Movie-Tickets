@@ -1,5 +1,5 @@
 import { Schema, model, Types } from "mongoose";
-import { IMovieCategory } from "../interfaces/movie-category.interface";
+import { IMovieCategory } from "../dto/movie-category.dto";
 
 const MovieCategorySchema = new Schema<IMovieCategory>({
    movieId: {

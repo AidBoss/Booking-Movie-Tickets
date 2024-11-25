@@ -2,17 +2,19 @@ import express from "express";
 import { createServer } from "http";
 import appConfig from "./config/app.config";
 import connection from "./config/database.config";
-import routerAPI from "./router/api";
+import routerAPI from "./routers/api";
 
 const app = express();
 const httpServer = createServer(app);
-const port: number = Number(process.env.PORT) || 9988;
-const localhost: string = process.env.HOST_NAME || "localhost";
+const port: number = Number(process.env.PORT);
+const localhost: string = process.env.HOST_NAME!;
 
 // Khởi tạo database và các kết nối khác
 (async () => {
    try {
-      await connection();  // Kết nối database
+      // Kết nối database
+      await connection();
+
       // Cấu hình ứng dụng và socket trước khi sử dụng router
       appConfig(app, httpServer);
 

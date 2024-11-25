@@ -1,7 +1,7 @@
 // models/payment.model.ts
 
 import { Schema, model } from 'mongoose';
-import { IPayment } from '../interfaces/payment.interface';
+import { IPayment } from '../dto/payment.dto';
 
 const PaymentSchema = new Schema<IPayment>({
    ticketId: { type: Schema.Types.ObjectId, ref: 'Ticket', required: true },

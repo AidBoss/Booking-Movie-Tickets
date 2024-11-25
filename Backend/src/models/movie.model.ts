@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { IMovie } from "../interfaces/movie.interface";
+import { IMovie } from "../dto/movie.dto";
 import movieCategoryModel from "./movie-category.model";
 import reviewModel from "./review.model";
 

@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './share/layout/layout.component';
-import { AuthComponent } from "./views/auth/auth.component";
-import { AuthGuard } from "./core/constants/auth.guard";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LayoutComponent} from './share/layout/layout.component';
+import {AuthComponent} from "./views/auth/auth.component";
+import {AdminGuard} from "./core/constants/admin.guard";
+import {AuthGuard} from "./core/constants/auth.guard";
 
 const routes: Routes = [
   {
@@ -13,12 +14,13 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./views/admin/admin-routing.module').then(m => m.AdminRoutingModule),
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'auth',
     component: AuthComponent,
-    loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
+    loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule),
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -26,4 +28,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

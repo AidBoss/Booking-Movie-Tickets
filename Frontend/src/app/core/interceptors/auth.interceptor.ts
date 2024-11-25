@@ -1,44 +1,47 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { AuthService } from './../services/api/auth.service';
-import { catchError, Observable, switchMap, throwError } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {AuthService} from './../services/api/auth.service';
+import {Observable, throwError} from 'rxjs';
+import {catchError, switchMap} from 'rxjs/operators';
+import {jwtDecode} from "jwt-decode";
 
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.url.toLowerCase().includes('/auth')) {
+      return next.handle(req);
+    }
     const token = localStorage.getItem('USER_TOKEN');
     if (token) {
-      const decodedToken: any = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-      const tokenExpirationTime = decodedToken.exp;
-      const timeRemaining = tokenExpirationTime - currentTime;
-      // Kiểm tra nếu thời gian hết hạn còn dưới 10 phút
-      if (timeRemaining < 10) { // 600 giây = 10 phút
-        console.log('token hết hạn')
-        // Nếu token hết hạn, làm mới token
-        return this.authService.getNewAccessToken().pipe(
-          switchMap((newToken: string) => {
-            // Cập nhật Access Token và thử lại yêu cầu
-            this.authService.saveTokenLocal(newToken);
-            const retryRequest = req.clone({
-              headers: req.headers.set('Authorization', `Bearer ${newToken}`),
-            });
-            return next.handle(retryRequest);
-          }),
-          catchError((refreshError) => {
-            // Nếu Refresh Token cũng hết hạn, đăng xuất
-            this.authService.logout();
-            return throwError(refreshError);
-          })
-        );
+      try {
+        let decodedToken: any = jwtDecode(token);
+        const tokenExpirationTime = decodedToken.exp;
+        const currentTime = Math.floor(Date.now() / 1000);
+        const timeRemaining = tokenExpirationTime - currentTime;
+        console.log(`Thời gian còn lại: ${timeRemaining} giây`);
+
+        if (timeRemaining > 90) {
+          // Nếu token còn hạn, thêm token vào header
+          const clonedRequest = req.clone({
+            headers: req.headers.set('Authorization', `Bearer ${token}`),
+          });
+          return next.handle(clonedRequest);
+        }
+
+      } catch (error) {
+        console.error('Error decoding token:', error);
       }
-      // Nếu token chưa hết hạn, tiếp tục yêu cầu bình thường
-      const clonedRequest = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${token}`),
-      });
-      return next.handle(clonedRequest)
     }
 
+    // Không có token hoặc không hợp lệ, tiếp tục request bình thường
     return next.handle(req);
   }
 }

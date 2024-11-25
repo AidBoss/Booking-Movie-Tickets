@@ -4,13 +4,13 @@ import dotenv from 'dotenv';
 import User from '../../models/user.model';
 import refreshTokenModel from '../../models/refreshToken.model';
 import logger from '../../logs/log.errors';
-import { IRegister, IloginResponse, IRegisterResponse } from '../../interfaces/auth.interface';
+import { IRegister, IloginResponse, IRegisterResponse } from '../../dto/auth.dto';
 
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY
 
 const generateAccessToken = (userId: string, role: string): string => {
-   return jwt.sign({ userId, role }, SECRET_KEY!, { expiresIn: '1m' });
+   return jwt.sign({ userId, role }, SECRET_KEY!, { expiresIn: '2m' });
 };
 
 const generateRefreshToken = (userId: string, role: string): string => {
@@ -33,7 +33,6 @@ const loginService = async (username: string, password: string): Promise<IloginR
       const existingToken = await refreshTokenModel.findOne({ userId: foundUser._id });
       let newRefreshToken = '';
       let expiresAt: Date;
-
       if (existingToken) {
          const now = new Date();
          if (existingToken.expiresAt > now) {
@@ -48,7 +47,7 @@ const loginService = async (username: string, password: string): Promise<IloginR
             // Cập nhật token mới trong cơ sở dữ liệu
             await refreshTokenModel.updateOne(
                { userId: foundUser._id },
-               { token: newRefreshToken, expiresAt }
+               { token: newRefreshToken }
             );
          }
       } else {
@@ -67,12 +66,21 @@ const loginService = async (username: string, password: string): Promise<IloginR
       return {
          status: 200,
          message: 'Đăng nhập thành công',
-         user: foundUser,
+         data: [
+            {
+               _id: foundUser._id,
+               fullname: foundUser.fullname,
+               username: foundUser.username,
+               email: foundUser.email,
+               phone: foundUser.phone,
+               role: foundUser.role,
+               password: foundUser.password
+            }
+         ],
          accessToken,
          refreshToken: {
             key: "refreshToken",
             token: newRefreshToken,
-            expiresAt: expiresAt.toISOString(),
          },
       };
    } catch (error: any) {
@@ -86,18 +94,14 @@ const loginService = async (username: string, password: string): Promise<IloginR
 const registerService = async (user: IRegister): Promise<IRegisterResponse> => {
    try {
       const { fullname, username, password, phone, email, role } = user;
-
       if (await User.findOne({ username })) {
          return { status: 409, message: 'Tên người dùng đã tồn tại' };
       }
-
       if (await User.findOne({ email })) {
          return { status: 409, message: 'Email đã tồn tại' };
       }
-
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = await User.create({ fullname, username, password: hashedPassword, phone, email, role });
-
       return { status: 201, message: 'Tạo tài khoản thành công', user: newUser };
    } catch (error: any) {
       logger.error(`Lỗi khi đăng ký: ${error.message}`);

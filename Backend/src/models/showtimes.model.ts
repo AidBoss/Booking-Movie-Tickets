@@ -1,4 +1,4 @@
-import { IShowtime } from "../interfaces/showtime.interface";
+import { IShowtime } from "../dto/showtime.dto";
 import { Schema, model, Types } from "mongoose";
 
 // Khai báo schema cho Showtime

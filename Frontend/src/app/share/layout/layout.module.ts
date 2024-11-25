@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
+import {UserMenuComponent} from "../component/user-menu/user-menu.component";
 
 @NgModule({
   declarations: [
+    UserMenuComponent,
     LayoutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     CommonModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
+
   ],
   exports: [
     LayoutComponent

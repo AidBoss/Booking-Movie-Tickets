@@ -1,9 +1,9 @@
 const api = 'http://localhost:9988/v1/api';
 export const apiEndPoint = {
   Auth: {
-    login: `${api}/login`,
-    register: `${api}/register`,
-    refreshToken: `${api}/refresh-token`,
+    login: `${api}/auth/login`,
+    register: `${api}/auth/register`,
+    refreshToken: `${api}/auth/refresh-token`,
   },
   Admin: {
     listUser: `${api}/admin/user`,

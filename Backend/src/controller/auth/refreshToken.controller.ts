@@ -4,9 +4,7 @@ import { refreshTokenService } from '../../services/auth/refreshToken.services';
 const refreshTokenController = async (req: Request, res: Response): Promise<void> => {
    try {
       const { refreshToken } = req.body;
-
       const result = await refreshTokenService(refreshToken);
-
       if (result.status === 200) {
          res.status(result.status).json({ message: result.message, accessToken: result.accessToken });
       } else {

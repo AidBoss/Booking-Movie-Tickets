@@ -1,5 +1,5 @@
 import { Schema, model, Types } from "mongoose";
-import { ISeat } from "../interfaces/seat.interface";
+import { ISeat } from "../dto/seat.dto";
 
 const SeatSchema = new Schema<ISeat>({
    screenId: {

@@ -1,47 +1,30 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { apiEndPoint } from '../../constants/constant';
-import { api_response } from '../../models/apiResponse';
-import { User } from '../../models/user.model';
-import { login_inter, register_inter } from '../../models/auth.model';
-import { Observable, tap, catchError } from 'rxjs';
-import { IndexedDbService } from '../indexeddb/indexed-db.service';
-import { of } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {apiEndPoint} from '../../constants/constant';
+import {api_response} from '../../models/apiResponse';
+import {User} from '../../models/user.model';
+import {login_inter, register_inter} from '../../models/auth.model';
+import {Observable, tap, catchError, of, throwError, map, switchMap} from 'rxjs';
+import {IndexedDbService} from '../indexeddb/indexed-db.service';
+import {jwtDecode} from 'jwt-decode';
 import Cookies from 'js-cookie';
+import {tokensServiceLocalStorage} from "../localStore/tokens.localStore.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private indexedDb: IndexedDbService) { }
+  constructor(private http: HttpClient, private indexedDb: IndexedDbService, private tokenStorage: tokensServiceLocalStorage) {
+  }
 
   login(data: login_inter): Observable<api_response<User>> {
-    return this.http.post<api_response<User>>(`${apiEndPoint.Auth.login}`, data, { withCredentials: true }).pipe(
-      tap((response) => {
+    return this.http.post<api_response<User>>(`${apiEndPoint.Auth.login}`, data, {withCredentials: true}).pipe(
+      tap(response => {
         if (response.accessToken) {
-          const refreshToken = Cookies.get('refreshToken');
-          if (refreshToken) {
-            try {
-              // Loại bỏ tiền tố "j:" trước khi parse
-              const cleanedToken = refreshToken.startsWith('j:') ? refreshToken.slice(2) : refreshToken;
-              const parsedToken = JSON.parse(cleanedToken);
-              // Truy cập các giá trị
-              const key = parsedToken.key;
-              const token = parsedToken.token;
-              const expiresAt = parsedToken.expiresAt;
-              this.indexedDb.saveToken(key, token, expiresAt);
-            } catch (error) {
-              console.error('Error parsing refreshToken:', error);
-            }
-          } else {
-            console.error('refreshToken not found!');
-          }
-          // this.indexedDb.saveToken(response.accessToken)
-          this.saveTokenLocal(response.accessToken);
+          this.tokenStorage.setATokenLocalStore(response.accessToken);
         }
       }),
-      catchError((error) => {
+      catchError(error => {
         console.error('Login failed:', error);
         throw error;
       })
@@ -49,45 +32,66 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    const token = localStorage.getItem('USER_TOKEN');
+    const refreshToken = this.getReTokenToCookie();
+    const token = this.tokenStorage.getATokenLocalStore();
     if (token) {
       try {
-        const decodedToken: any = jwtDecode(token);
+        let decodedToken: any = jwtDecode(token);
+        const tokenExpirationTime = decodedToken.exp;
         const currentTime = Math.floor(Date.now() / 1000);
-        return of(decodedToken.exp > currentTime);  // Trả về Observable<boolean>
+        const timeRemaining = tokenExpirationTime - currentTime;
+        if (timeRemaining < 90) {
+          if (refreshToken) {
+            return this.getAccessToken().pipe(
+              switchMap((response: any) => {
+                if (response.accessToken) {
+                  // Cập nhật token mới
+                  const newToken = response.accessToken;
+                  this.tokenStorage.setATokenLocalStore(newToken);
+                  return of(true);
+                }
+                return of(false);
+              })
+            )
+          }
+        }
+        return of(true);
       } catch (error) {
         console.error('Invalid token:', error);
-        return of(false);  // Trả về Observable<boolean>
+        return of(false);
       }
-    }
-    return of(false);  // Trả về Observable<boolean>
+    } else if (refreshToken) {
+      return this.getAccessToken().pipe(
+        switchMap((response: any) => {
+          if (response.accessToken) {
+            // Cập nhật token mới
+            const newToken = response.accessToken;
+            this.tokenStorage.setATokenLocalStore(newToken);
+            return of(true);
+          }
+          return of(false);
+        })
+      )
+    } else return of(false);
   }
 
   isAdmin(): Observable<boolean> {
-    const token = localStorage.getItem('USER_TOKEN');
+    const token = this.tokenStorage.getATokenLocalStore();
     if (token) {
       try {
         const decodedToken: any = jwtDecode(token);
-        return of(decodedToken.role === 'admin');  // Trả về Observable<boolean>
+        return of(decodedToken.role === 'admin');
       } catch (error) {
         console.error('Invalid token:', error);
-        return of(false);  // Trả về Observable<boolean>
+        return of(false);
       }
     }
-    return of(false);  // Trả về Observable<boolean>
+    return of(false);
   }
 
-  saveTokenLocal(token: string): void {
-    if (token) {
-      localStorage.setItem('USER_TOKEN', token);
-    }
-  }
-  getTokenLocal(): string | null {
-    return localStorage.getItem('USER_TOKEN');
-  }
   register(data: register_inter): Observable<api_response<User>> {
     return this.http.post<api_response<User>>(`${apiEndPoint.Auth.register}`, data).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Registration failed:', error);
         throw error;
       })
@@ -96,42 +100,37 @@ export class AuthService {
 
   async logout(): Promise<void> {
     localStorage.removeItem('USER_TOKEN');
-    // await this.indexedDb.deleteToken('accessToken');
   }
 
-  getNewAccessToken(): Observable<string> {
-    return new Observable((observer) => {
-      // Lấy Refresh Token từ IndexedDB
-      this.indexedDb.getToken('refreshToken').then((storedToken: any) => {
-        if (!storedToken || !storedToken.token) {
-          observer.error('Refresh Token không tồn tại.');
-          return;
-        }
-        const refreshToken = storedToken.token;
-        // Gửi yêu cầu tới endpoint để lấy Access Token mới
-        this.http.post<{ accessToken: string }>(`${apiEndPoint.Auth.refreshToken}`, { refreshToken })
-          .subscribe({
-            next: (response) => {
-              // Trả về Access Token mới
-              observer.next(response.accessToken);
-              observer.complete();
-            },
-            error: (error) => observer.error(error),
-          });
-      }).catch((err) => observer.error(err));
-    });
+  getReTokenToCookie(): any {
+    const refreshToken = Cookies.get('refreshToken');
+    try {
+      if (refreshToken) {
+        const cleanedToken = refreshToken.startsWith('j:') ? refreshToken.slice(2) : refreshToken;
+        const parsedToken = JSON.parse(cleanedToken);
+        return parsedToken.token || null;
+      }
+      console.log("Không tìm thấy refresh token : ")
+      return null;
+    } catch (error) {
+      console.error('Lỗi chuyển đổi tokens:', error);
+      return null;
+    }
   }
-  refreshToken(): Observable<api_response<{ accessToken: string }>> {
-    return this.http.post<api_response<{ accessToken: string }>>(`${apiEndPoint.Auth.refreshToken}`, {}).pipe(
+
+  getAccessToken(): Observable<any> {
+    const refreshToken = this.getReTokenToCookie();
+    return this.http.post<api_response<any>>(`${apiEndPoint.Auth.refreshToken}`, {refreshToken}).pipe(
       tap((response) => {
         if (response.accessToken) {
-          this.saveTokenLocal(response.accessToken);
+          this.tokenStorage.setATokenLocalStore(response.accessToken);
         }
       }),
       catchError((error) => {
         console.error('Token refresh failed:', error);
-        throw error;
+        return throwError(error);
       })
     );
   }
+
 }

@@ -63,18 +63,11 @@ export class IndexedDbService {
   }
 
   // Lưu token
-  async saveToken(key: string, token: string, expiresAt: string): Promise<void> {
-    console.log("key : ", key);
-    console.log("-------");
-    console.log("token : ", token);
-    console.log("--------------------------------");
-    console.log("expiresAt : ", expiresAt);
-
+  async saveToken(key: string, token: string): Promise<void> {
     const db = await this.ensureDBReady();
     const transaction = db.transaction(this.storeName, 'readwrite');
     const store = transaction.objectStore(this.storeName);
-
-    const data = { key, token, expiresAt };
+    const data = { key, token };
     const request = store.put(data, key);
     return new Promise((resolve, reject) => {
       request.onsuccess = () => resolve();

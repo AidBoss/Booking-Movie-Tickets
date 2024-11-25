@@ -8,12 +8,16 @@ import { AdminModule } from "./views/admin/admin.module";
 import { AuthModule } from "./views/auth/auth.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
-import { AuthGuard } from "./core/constants/auth.guard";
+import { AdminGuard } from "./core/constants/admin.guard";
 import { IndexedDbService } from './core/services/indexeddb/indexed-db.service';
+import { AuthService } from "./core/services/api/auth.service";
+import {AuthGuard} from "./core/constants/auth.guard";
+
 
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -26,12 +30,13 @@ import { IndexedDbService } from './core/services/indexeddb/indexed-db.service';
   ],
   providers: [
     IndexedDbService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-      deps: [HttpClientModule]
     },
+    AdminGuard,
     AuthGuard
   ],
   bootstrap: [AppComponent]

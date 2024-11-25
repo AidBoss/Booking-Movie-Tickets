@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import categoryServices from "../../services/admin/category.services";
-import { ICategoryCreate } from "../../interfaces/category.interface";
+import { ICategoryCreate } from "../../dto/category.dto";
 
 const getAllCategory = async (req: Request, res: Response): Promise<void> => {
    const result = await categoryServices.getAllCategory();

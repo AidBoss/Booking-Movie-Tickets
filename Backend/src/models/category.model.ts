@@ -1,4 +1,4 @@
-import { ICategory } from "../interfaces/category.interface";
+import { ICategory } from "../dto/category.dto";
 import { model, Schema } from "mongoose"
 import movieCategoryModel from "./movie-category.model";
 

@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IScreen } from '../interfaces/screen.interface';
+import { IScreen } from '../dto/screen.dto';
 
 const ScreenSchema = new Schema<IScreen>({
    name: { type: String, required: true, maxlength: 120 },

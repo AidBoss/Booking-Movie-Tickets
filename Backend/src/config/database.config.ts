@@ -42,7 +42,7 @@ const connection = async (): Promise<void> => {
       };
 
       // Kết nối tới MongoDB
-      await mongoose.connect(process.env.DB_HOST || '9988', options);
+      await mongoose.connect(process.env.DB_HOST!, options);
 
       // Lấy trạng thái kết nối
       const state = Number(mongoose.connection.readyState);
@@ -51,7 +51,7 @@ const connection = async (): Promise<void> => {
       const connectionState = dbState.find((f) => f.value === state)?.label;
       console.log(connectionState, "to db");
    } catch (error) {
-      console.error('Lỗi khi kết nối đế db:', error);
+      console.error('Lỗi khi kết nối đến db:', error);
    }
 };
 

@@ -4,7 +4,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManagerProductComponent } from './manager-product/manager-product.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
-import { AuthGuard } from 'src/app/core/constants/auth.guard';
+import { AdminGuard } from '../../core/constants/admin.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
       { path: 'manager-movie', component: ManagerProductComponent },
       { path: 'edit-user/:id', component: EditUserComponent },
     ],
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   }
 ];
 

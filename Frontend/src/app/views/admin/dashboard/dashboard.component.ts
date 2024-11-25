@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../../core/services/api/user.service";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../../core/services/api/user.service";
 import Swal from 'sweetalert2';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/core/models/user.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {User} from 'src/app/core/models/user.model';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,43 +11,49 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class DashboardComponent implements OnInit {
   errorMessage: string = '';
-  dis: boolean = false;
+  checked: boolean = false;
   users: User[] = [];
-
+  txt: string = "";
   NewArrUser: User[] = []
+
   constructor(private userService: UserService, private router: Router) {
   }
+
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe({
       next: (response) => {
-        // Nếu response.data là undefined hoặc null, gán mảng rỗng
         this.users = response.data ?? [];
         this.NewArrUser = [...this.users];
       },
       error: (error: any) => {
+        this.errorMessage = error
         this.errorMessage = error.error.message;
       }
     });
   }
 
 
-
   editUser = (id: string) => {
     this.router.navigate(['/edit-user', id]);
   }
+
   LockUser = (id: string, status: boolean) => {
+    if (status) {
+      this.txt = "khóa"
+    } else {
+      this.txt = "mở"
+    }
     const data = {
       status: status,
       _id: id,
     };
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: `Bạn có chắc chắn ${this.txt} không?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Lock it!"
+      confirmButtonText: `${this.txt}`
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.lockUser(data).subscribe({
@@ -55,16 +62,12 @@ export class DashboardComponent implements OnInit {
             if (user !== -1) {
               this.NewArrUser[user].status = !this.NewArrUser[user].status;
               this.users = [...this.NewArrUser]
-              this.dis = true;
             }
             Swal.fire({
-              title: "Locked!",
-              text: "User has been marked as Locked.",
+              title: `Đã ${this.txt}!`,
+              text: `Bạn đã ${this.txt} thành công.`,
               icon: "success",
             });
-            setTimeout(() => {
-              this.dis = false;
-            }, 2500);
           },
           error: (error: any) => {
             this.errorMessage = error.error.message;
@@ -72,17 +75,17 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
-
   }
+
   deleteUserById = (id: string) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Bạn có chắc chắn không ?",
+      text: "Bạn không thể sửa đổi lại!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: " Xóa !"
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.deleteUserById(id).subscribe({
@@ -90,8 +93,8 @@ export class DashboardComponent implements OnInit {
             const user = this.NewArrUser.filter(user => user._id !== id);
             this.users = [...user];
             Swal.fire({
-              title: "Deleted!",
-              text: "User has been marked as deleted.",
+              title: "Đã xóa!",
+              text: "Bạn đã xóa thành công.",
               icon: "success"
             });
           },
@@ -103,4 +106,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  selectAll(event: Event) {
+
+  }
 }

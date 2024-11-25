@@ -14,10 +14,13 @@ const appConfig = (app: Application, httpServer: http.Server): void => {
 
    // Middleware cho session
    app.use(session({
-      secret: process.env.SESSION_SECRET || "secretKeyOfPobDev",
+      secret: process.env.SESSION_SECRET || 'Default',
       resave: false,
       saveUninitialized: true,
-      cookie: { secure: false },
+      cookie: {
+         httpOnly: true,
+         secure: false,
+      },
    }));
 
    // Middleware cho CORS
@@ -26,11 +29,12 @@ const appConfig = (app: Application, httpServer: http.Server): void => {
          origin: process.env.CORS_ORIGIN,
          optionsSuccessStatus: 200,
          credentials: true,
-         methods: ['GET', 'POST',],
+         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
          allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
          exposedHeaders: ['Authorization'],
-         preflightContinue: false, // for development
-         maxAge: 60 * 60 * 24 * 365 * 1000, // 1 year
+         preflightContinue: false,
+         // 1 năm
+         maxAge: 60 * 60 * 24 * 365 * 1000,
       })
    )
 };

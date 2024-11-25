@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import managerUserServices from '../../services/admin/manager-user.services';
+import managerUserServices from '../../services/admin/user.services';
+
 const getAllUsers = async (req: Request, res: Response) => {
    try {
       const result = await managerUserServices.getAllUser();
@@ -33,6 +34,9 @@ const deleteUser = async (req: Request, res: Response) => {
    const userId = req.params.id;
    const result = await managerUserServices.deleteUser(userId);
    res.status(result.status).json({ message: result.message });
+}
+const deleteAll = async (req: Request, res: Response) => {
+
 }
 
 export default { getAllUsers, getUserById, updateUser, LockUser, deleteUser };

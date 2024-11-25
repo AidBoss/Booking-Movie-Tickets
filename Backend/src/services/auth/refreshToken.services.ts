@@ -19,17 +19,18 @@ export const refreshTokenService = async (refreshToken: string) => {
          if (!user) {
             return { status: 403, message: 'Người dùng không tồn tại.' };
          }
-         const token = refreshTokenModel.findById(user._id);
+         const token = refreshTokenModel.find({ refreshToken: refreshToken });
          if (!token) {
             return { status: 403, message: 'Refresh token không tồn tại.' };
          }
-
          // Tạo mới access token
          const newAccessToken = jwt.sign(
             { userId: user._id, role: user.role },
             SECRET_KEY,
-            { expiresIn: '1m' }
+            { expiresIn: '2m' }
          );
+         console.log("New access token: ", newAccessToken);
+
          return {
             status: 200,
             message: 'Làm mới access token thành công.',

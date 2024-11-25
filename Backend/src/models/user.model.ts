@@ -1,4 +1,4 @@
-import { IUser } from './../interfaces/user.interface';
+import { IUser } from '../dto/user.dto';
 import { model, Schema } from "mongoose";
 
 // Định nghĩa UserSchema

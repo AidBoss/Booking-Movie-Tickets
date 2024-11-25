@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
-import { Ilogin, IRegister } from '../../interfaces/auth.interface';
+import { Ilogin, IRegister } from '../../dto/auth.dto';
 import logger from '../../logs/log.errors';
 import authServices from '../../services/auth/auth.services';
-import * as express from "express";
-
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,10 +14,11 @@ const loginController = async (req: Request, res: Response): Promise<void> => {
             httpOnly: false,
             sameSite: 'strict',
             secure: false,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
          });
          res.status(result.status).json({
             message: result.message,
-            user: result.user,
+            data: result.data,
             accessToken: result.accessToken,
          });
       } else {

@@ -1,4 +1,4 @@
-import { ICategoryResponse, ICategoryCreate } from "../../interfaces/category.interface";
+import { ICategoryResponse, ICategoryCreate } from "../../dto/category.dto";
 import Category from "../../models/category.model";
 import mongoose from "mongoose";
 import logger from "../../logs/log.errors";

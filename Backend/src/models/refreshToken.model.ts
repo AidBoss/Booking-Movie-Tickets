@@ -1,10 +1,8 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 interface IRefreshToken extends Document {
-   userId: mongoose.Types.ObjectId; // ID của người dùng
-   // Refresh Token
+   userId: mongoose.Types.ObjectId;
    token: string;
-   // Thời gian hết hạn của token
    expiresAt: Date;
    createdAt: Date;
    updatedAt: Date;

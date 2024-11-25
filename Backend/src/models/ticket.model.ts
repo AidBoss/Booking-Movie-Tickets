@@ -1,5 +1,5 @@
 import { Schema, model, Types } from "mongoose";
-import { ITicket } from "../interfaces/ticket.interface";
+import { ITicket } from "../dto/ticket.dto";
 
 const TicketSchema = new Schema<ITicket>({
    showtimeId: {

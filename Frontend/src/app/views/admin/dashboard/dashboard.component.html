@@ -8,54 +8,55 @@
           <div class="table-responsive">
             <table class="table table-borderless mb-0">
               <thead>
-                <tr>
-                  <th scope="col">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    </div>
-                  </th>
-                  <th scope="col">FullName</th>
-                  <th scope="col">UserName</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Action</th>
-                </tr>
+              <tr>
+                <th scope="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" (click)="selectAll($event)" id="flexCheckDefault"/>
+                  </div>
+                </th>
+                <th scope="col">FullName</th>
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>
+              </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let user of users; let i = index">
-                  <th scope="row">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
-                    </div>
-                  </th>
-                  <td>{{ user.fullname }}</td>
-                  <td>{{ user.username }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.phone }}</td>
-                  <td>{{ user.address }}</td>
-                  <td>{{ user.role }}</td>
-                  <td>
-                    <button class="btn" (click)="editUser(user._id)"><i class="fa-solid fa-pencil"></i></button>
-                    <button [ngClass]="dis ? 'disabled':'' " class="btn" (click)="LockUser(user._id, user.status)">
-                      <i *ngIf="!user.status; else unlock" class="fa-solid fa-lock"></i>
-                      <ng-template #unlock>
-                        <i class="fa-solid fa-lock-open"></i>
-                      </ng-template></button>
-                    <button class="btn" (click)="deleteUserById(user._id)">
-                      <i class="fa-solid fa-delete-left"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr *ngIf="users.length ==0">
-                  <td colspan="9" class="text-center">Không có nguời dùng nào</td>
-                </tr>
-                <tr *ngIf="users.length > 15">
-                  <td colspan="9" class="text-center">
-                    <button class="btn btn-primary">Load More</button>
-                  </td>
-                </tr>
+              <tr *ngFor="let user of users; let i = index">
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox"  id="checkbox{{i}}"/>
+                  </div>
+                </th>
+                <td>{{ user.fullname }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <button class="btn" (click)="editUser(user._id)"><i class="fa-solid fa-pencil"></i></button>
+                  <button class="btn" (click)="LockUser(user._id, user.status)">
+                    <i *ngIf="!user.status; else unlock" class="fa-solid fa-lock"></i>
+                    <ng-template #unlock>
+                      <i class="fa-solid fa-lock-open"></i>
+                    </ng-template>
+                  </button>
+                  <button class="btn" (click)="deleteUserById(user._id)">
+                    <i class="fa-solid fa-delete-left"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="users.length ==0">
+                <td colspan="9" class="text-center">Không có nguời dùng nào</td>
+              </tr>
+              <tr *ngIf="users.length > 15">
+                <td colspan="9" class="text-center">
+                  <button class="btn btn-primary">Load More</button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>

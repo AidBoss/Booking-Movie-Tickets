@@ -1,3 +1,9 @@
-<div class="page-home">
+<div class="page-home d-flex">
 
+  <div class="container d-flex justify-content-center flex-column align-items-center">
+    <div class="error-mess mb-2" *ngIf="mess">
+      <p class="text-danger">{{ mess }}</p>
+    </div>
+    <button class="btn btn-warning" (click)="getAccessToken()">reset access token</button>
+  </div>
 </div>
