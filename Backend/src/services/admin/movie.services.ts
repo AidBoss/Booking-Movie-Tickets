@@ -1,7 +1,7 @@
 import { IMovie, IMovieCreate, IMovieResponse } from '../../dto/movie.dto';
 import Movie from '../../models/movie.model';
 import mongoose from "mongoose";
-import logger from "../../logs/log.errors";
+import logger from "../../logs/logger";
 
 const isValidObjectId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);
 
@@ -96,5 +96,5 @@ export default {
    getMovieById,
    createMovie,
    updateMovie,
-
+   deleteMoive
 }

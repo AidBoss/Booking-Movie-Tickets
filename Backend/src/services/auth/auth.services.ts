@@ -3,11 +3,12 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../../models/user.model';
 import refreshTokenModel from '../../models/refreshToken.model';
-import logger from '../../logs/log.errors';
+import logger from '../../logs/logger';
 import { IRegister, IloginResponse, IRegisterResponse } from '../../dto/auth.dto';
 
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY
+console.log(SECRET_KEY);
 
 const generateAccessToken = (userId: string, role: string): string => {
    return jwt.sign({ userId, role }, SECRET_KEY!, { expiresIn: '2m' });
