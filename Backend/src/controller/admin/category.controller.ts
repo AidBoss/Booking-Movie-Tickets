@@ -46,10 +46,16 @@ const deleteCategoryById = async (req: Request, res: Response): Promise<void> =>
    res.status(result.status).json({ message: result.message });
 };
 
+const deleteCategoryAll = async (req: Request, res: Response): Promise<void> => {
+   const ids = req.body
+   const result = await categoryServices.deleteCategoryAll(ids);
+   res.status(result.status).json({ message: result.message });
+}
 export default {
    getAllCategory,
    getCategoryById,
    createCategory,
    updateCategoryById,
-   deleteCategoryById
+   deleteCategoryById,
+   deleteCategoryAll
 };

@@ -22,6 +22,7 @@ export const getAllMovies = async (): Promise<IMovieResponse> => {
       return { status: 500, message: 'Lỗi server' };
    }
 }
+
 export const getMovieById = async (id: string): Promise<IMovieResponse> => {
    if (!isValidObjectId(id)) {
       return { status: 404, message: 'ID Không hợp lệ' }
@@ -42,6 +43,7 @@ export const getMovieById = async (id: string): Promise<IMovieResponse> => {
       return { status: 500, message: 'Lỗi server' };
    }
 }
+
 export const createMovie = async (data: IMovieCreate): Promise<IMovieResponse> => {
    try {
       const newMovie = new Movie(data);
@@ -57,12 +59,13 @@ export const createMovie = async (data: IMovieCreate): Promise<IMovieResponse> =
       return { status: 500, message: 'Lỗi server' };
    }
 }
-export const updateMovie = async (data: IMovie): Promise<IMovieResponse> => {
-   if (isValidObjectId(data.id)) {
+
+export const updateMovie = async (id: string, data: IMovieCreate): Promise<IMovieResponse> => {
+   if (isValidObjectId(id)) {
       return { status: 400, message: 'ID phim không hợp lệ' };
    }
    try {
-      const result = await Movie.findByIdAndUpdate(data);
+      const result = await Movie.findByIdAndUpdate({ _id: id }, data);
       if (result) {
          return { status: 200, message: 'Bạn đã sử thành công' }
       } else {
@@ -73,7 +76,8 @@ export const updateMovie = async (data: IMovie): Promise<IMovieResponse> => {
       return { status: 500, message: 'Lỗi server' };
    }
 }
-export const deleteMoive = async (id: string): Promise<IMovieResponse> => {
+
+export const deleteMovie = async (id: string): Promise<IMovieResponse> => {
    if (isValidObjectId(id)) {
       return { status: 400, message: 'ID phim không hợp lệ' };
    }
@@ -91,10 +95,36 @@ export const deleteMoive = async (id: string): Promise<IMovieResponse> => {
       return { status: 500, message: 'Lỗi server' };
    }
 }
+
+export const deleteMovieAll = async (ids: string[]): Promise<IMovieResponse> => {
+   if (!ids || ids.length === 0) {
+      return {
+         status: 400,
+         message: 'ID không hợp lệ'
+      };
+   }
+   try {
+      const result = await Movie.deleteMany({ _id: { $in: ids } });
+      if (result) {
+         return {
+            status: 200,
+            message: 'Xóa tất cả phim thành công',
+            deletedCount: result.deletedCount,
+         };
+      } else {
+         return { status: 404, message: 'Không tìm thấy phim để xóa' };
+      }
+   } catch (error: any) {
+      logger.error(`Xóa thất bại : ${error.message}`);
+      return { status: 500, message: 'Lỗi server' };
+   }
+}
+
 export default {
    getAllMovies,
    getMovieById,
    createMovie,
    updateMovie,
-   deleteMoive
+   deleteMovie,
+   deleteMovieAll
 }

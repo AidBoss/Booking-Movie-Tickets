@@ -123,9 +123,6 @@ const deleteCategoryById = async (id: string): Promise<ICategoryResponse> => {
       };
    }
    try {
-      // xóa các liên kết giữa thể loại và phim
-      // await movieCategory.deleteMany({ categoryId: id });
-      //  xóa thể loại
       const result = await Category.findByIdAndDelete(id);
       if (result) {
          return {

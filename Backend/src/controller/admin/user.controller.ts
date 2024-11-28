@@ -35,6 +35,7 @@ const deleteUser = async (req: Request, res: Response) => {
    const result = await userServices.deleteUser(userId);
    res.status(result.status).json({ message: result.message });
 }
+
 const deleteAll = async (req: Request, res: Response) => {
    const ids = req.body;
    const result = await userServices.deleteAllUser(ids);
