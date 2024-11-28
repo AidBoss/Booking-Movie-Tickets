@@ -33,7 +33,6 @@ const appConfig = (app: Application, httpServer: http.Server): void => {
          allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
          exposedHeaders: ['Authorization'],
          preflightContinue: false,
-         // 1 năm
          maxAge: 60 * 60 * 24 * 365 * 1000,
       })
    )

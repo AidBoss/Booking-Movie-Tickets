@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Ilogin, IRegister } from '../../dto/auth.dto';
-import logger from '../../logs/log.errors';
+import logger from '../../logs/logger';
 import authServices from '../../services/auth/auth.services';
 import dotenv from 'dotenv';
 dotenv.config();

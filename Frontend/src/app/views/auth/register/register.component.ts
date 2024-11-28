@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { register_inter } from "../../../core/models/auth.model";
-import { AuthService } from "../../../core/services/api/auth.service";
-import { Router } from "@angular/router";
-import { HttpErrorResponse } from "@angular/common/http";
+import {Component, inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {register_inter} from "../../../core/models/auth.model";
+import {AuthService} from "../../../core/services/api/auth.service";
+import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-register',
@@ -26,14 +26,14 @@ export class RegisterComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$')]],
         confirmPassword: ['', [Validators.required]]
       })
-    }, { validator: this.passwordMatchValidator });
+    }, {validator: this.passwordMatchValidator});
   }
 
   ngOnInit(): void {
   }
 
   passwordMatchValidator(form: FormGroup) {
-    return form.get('pw.password')?.value === form.get('pw.confirmPassword')?.value ? null : { 'mismatch': true };
+    return form.get('pw.password')?.value === form.get('pw.confirmPassword')?.value ? null : {'mismatch': true};
   }
 
   getError(controlName: string): string {

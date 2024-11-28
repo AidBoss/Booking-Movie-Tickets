@@ -7,6 +7,7 @@ import { ManagerProductComponent } from './manager-product/manager-product.compo
 import { SidebarComponent } from 'src/app/share/component/sidebar/sidebar.component';
 import { ButtonEDComponent } from 'src/app/share/component/button-ed/button-ed.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     AdminComponent

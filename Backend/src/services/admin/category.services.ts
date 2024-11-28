@@ -1,7 +1,7 @@
 import { ICategoryResponse, ICategoryCreate } from "../../dto/category.dto";
 import Category from "../../models/category.model";
 import mongoose from "mongoose";
-import logger from "../../logs/log.errors";
+import logger from "../../logs/logger";
 
 // hàm check id 
 const isValidObjectId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);

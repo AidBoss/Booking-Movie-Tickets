@@ -27,10 +27,8 @@ export const refreshTokenService = async (refreshToken: string) => {
          const newAccessToken = jwt.sign(
             { userId: user._id, role: user.role },
             SECRET_KEY,
-            { expiresIn: '2m' }
+            { expiresIn: '3h' }
          );
-         console.log("New access token: ", newAccessToken);
-
          return {
             status: 200,
             message: 'Làm mới access token thành công.',
