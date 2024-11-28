@@ -8,6 +8,7 @@ import { IRegister, IloginResponse, IRegisterResponse } from '../../dto/auth.dto
 
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY
+console.log(SECRET_KEY);
 
 const generateAccessToken = (userId: string, role: string): string => {
    return jwt.sign({ userId, role }, SECRET_KEY!, { expiresIn: '3h' });

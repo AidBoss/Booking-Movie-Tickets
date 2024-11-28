@@ -24,6 +24,8 @@ const getDistrictById = async (req: Request, res: Response): Promise<void> => {
 const searchDistrict = async (req: Request, res: Response): Promise<void> => {
    const { codeName, code, provinceCode } = req.query;
 
+   console.log(codeName, code, provinceCode);
+
    const searchCriteria: Record<string, any> = {};
    if (codeName) {
       searchCriteria.CodeName = { $regex: codeName, $options: 'i' };
