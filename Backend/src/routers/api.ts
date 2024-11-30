@@ -1,13 +1,14 @@
 import express from "express";
 import authController from "../controller/auth/auth.controller";
 import refreshTokenController from "../controller/auth/refreshToken.controller";
-import { authenticateToken } from "../Middleware/auth.middleware";
+import {authenticateToken, authorize} from "../Middleware/auth.middleware";
 import userController from "../controller/admin/user.controller";
 import categoryController from "../controller/admin/category.controller";
 import movieController from "../controller/admin/movie.controller";
 import provinceController from "../controller/client/province.controller";
 import districtController from "../controller/client/district.controller";
 import wardController from "../controller/client/ward.controller";
+
 const routerAPI = express.Router();
 
 
@@ -21,10 +22,15 @@ routerAPI.post('/refresh-token', refreshTokenController)
 // ------------- user -----------------
 routerAPI.get('/admin', authenticateToken)
 
+routerAPI.get('/admin/user', authenticateToken, userController.getAllUsers)
+
 routerAPI.put('/admin/user/:id', userController.updateUser)
+
+routerAPI.patch('/admin/user/:id', userController.LockUser)
 
 routerAPI.delete('/admin/user/:id', userController.deleteUser)
 
+routerAPI.get('/admin/fake-user',userController.fakeUser)
 // ------------- category ------------
 
 routerAPI.post('/admin/category', categoryController.createCategory)
@@ -46,15 +52,9 @@ routerAPI.delete('/admin/movie/:id', movieController.deleteMovieById)
 routerAPI.delete('/admin/movie/:ids', movieController.deleteMovieAll)
 
 
-
-
-
-
-
-
-
-
 // router user
+routerAPI.get('/user', authenticateToken)
+
 // -------------users ------------
 routerAPI.get('/user', userController.getAllUsers)
 

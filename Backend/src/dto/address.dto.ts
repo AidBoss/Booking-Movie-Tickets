@@ -1,5 +1,14 @@
 import { Document } from "mongoose";
-// provinces 
+// provinces
+export interface IAddress extends Document{
+   ProvinceCode:string;
+   DistrictCode:string;
+   WardCode:string;
+   StreetAddress:string;
+   createdAt?:Date;
+   updatedAt?:Date;
+}
+
 export interface IProvince extends Document {
    Type: string,
    Code: string,
@@ -36,7 +45,7 @@ export interface IWard extends Document {
    AdministrativeUnitId: number;
 }
 
-export interface IAddress<T> {
+export interface IAddressResponse<T> {
    status: number;
    message: string;
    data?: T[]

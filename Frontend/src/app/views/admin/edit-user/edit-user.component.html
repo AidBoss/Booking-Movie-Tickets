@@ -7,26 +7,26 @@
         <span class="font-weight-bold">Edogaru</span>
         <span class="text-black-50">edogaru>mail.com.my</span></div>
     </div>
-    <form *ngFor="let u of user" [formGroup]="editUserForm" (ngSubmit)="onSubmit()" class="col-md-5 border-right">
+    <form *ngIf="user" [formGroup]="editUserForm" (ngSubmit)="onSubmit()" class="col-md-5 border-right">
       <div class="d-flex justify-content-between align-items-center mb-2 mt-2">
         <h4 class="text-center text-success mt-2 mb-2 ">Chỉnh sửa thông tin người dùng</h4>
       </div>
       <div class="row mt-1">
         <div class="col-md-6"><label class="labels">Tên </label>
-          <input type="text" class="form-control" formControlName="fullname" placeholder="{{u.fullname}}"
-                 value="{{u.fullname}}">
+          <input type="text" class="form-control" formControlName="fullName" placeholder="{{user.fullName}}"
+                 value="{{user.fullName}}">
           <div
-            *ngIf="(editUserForm.get('fullname')?.touched || editUserForm.get('fullname')?.dirty) && editUserForm.get('fullname')?.invalid"
+            *ngIf="(editUserForm.get('fullName')?.touched || editUserForm.get('fullName')?.dirty) && editUserForm.get('fullName')?.invalid"
             class="text-danger w-100">
-            <small>{{ getError('fullname') }}</small>
+            <small>{{ getError('fullName') }}</small>
           </div>
         </div>
         <div class="col-md-6"><label class="labels">Tài khoản</label>
-          <input type="text" disabled class="form-control" value="{{u.username}}" placeholder="{{u.username}}"></div>
+          <input type="text" disabled class="form-control" value="{{user.username}}" placeholder="{{user.username}}"></div>
       </div>
       <div class="row mt-3">
         <div class="mb-2 col-md-12"><label class="labels">Email</label>
-          <input type="text" class="form-control" formControlName="email" placeholder="{{u.email}}" [value]="u.email" >
+          <input type="text" class="form-control" formControlName="email" placeholder="{{user.email}}" [value]="user.email">
           <div
             *ngIf="(editUserForm.get('email')?.touched || editUserForm.get('email')?.dirty) && editUserForm.get('email')?.invalid"
             class="text-danger w-100">
@@ -35,7 +35,7 @@
         </div>
         <div class="mb-2 col-md-12">
           <label class="labels">Phone</label>
-          <input type="text" class="form-control" placeholder="{{u.phone}}" value="{{u.phone}}">
+          <input type="text" class="form-control" placeholder="{{user.phone}}" value="{{user.phone}}">
         </div>
         <div class="mb-2 col-md-12">
           <label class="labels">Tỉnh / Thành Phố</label>
@@ -59,7 +59,7 @@
           </select>
         </div>
         <div class="mb-2 col-md-12"><label class="labels">Quyền</label>
-          <input type="text" class="form-control" disabled placeholder="Role" value="{{u.role}}"></div>
+          <input type="text" class="form-control" disabled placeholder="Role" value="{{user.role}}"></div>
       </div>
       <div class="mt-5 text-center">
         <button class="btn btn-primary profile-button" type="button">Lưu</button>

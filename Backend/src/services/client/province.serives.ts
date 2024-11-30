@@ -1,11 +1,11 @@
-import { IAddress, IProvince } from "../../dto/address.dto";
+import {IAddressResponse, IProvince} from "../../dto/address.dto";
 import Province from "../../models/province.model";
 import mongoose from "mongoose";
 import logger from "../../logs/logger";
 
 const isValidObjectId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);
 
-const getAllProvinces = async (): Promise<IAddress<IProvince>> => {
+const getAllProvinces = async (): Promise<IAddressResponse<IProvince>> => {
    try {
       const result = await Province.find().lean<IProvince[]>();
       if (result && result.length > 0) {

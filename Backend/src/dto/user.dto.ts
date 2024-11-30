@@ -1,14 +1,13 @@
-import { Document } from "mongoose";
+import {Document, Schema} from "mongoose";
 export interface IUser extends Document {
    username: string;
    password: string;
    email: string;
-   fullname: string;
+   fullName: string;
    phone: string;
-   role?: string;
-   address: string,
+   roleId?: Schema.Types.ObjectId;
+   addressId?: Schema.Types.ObjectId;
    status?: boolean;
-   deleted?: boolean;
    createdAt?: Date;
    updatedAt?: Date;
 }
@@ -20,10 +19,11 @@ export interface IUserResponse {
    deleteCount?: number;
 }
 export interface IUserUpdate {
-   fullname?: string;
+   fullName?: string;
    email?: string;
+   password?: string;
    phone?: string;
-   address?: string;
-   role?: string;
+   roleId?: Schema.Types.ObjectId;
+   addressId?: Schema.Types.ObjectId;
    status?: string;
 }

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import logger from '../../logs/logger';
-import { IAddress, IDistrict } from '../../dto/address.dto';
+import { IAddressResponse, IDistrict } from '../../dto/address.dto';
 import District from '../../models/district.model';
 const isValidObjectId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);
 
-const getAllDistrict = async (): Promise<IAddress<IDistrict>> => {
+const getAllDistrict = async (): Promise<IAddressResponse<IDistrict>> => {
    try {
       const result = await District.find()
       if (result) {

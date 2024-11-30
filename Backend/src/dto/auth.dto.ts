@@ -12,12 +12,10 @@ export interface IloginResponse {
    refreshToken?: {};
 }
 export interface IRegister {
-   fullname: string;
+   fullName: string;
    username: string;
    password: string;
    email: string;
-   phone: string;
-   role: string;
 }
 export interface IRegisterResponse {
    status: number;

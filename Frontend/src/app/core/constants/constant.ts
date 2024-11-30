@@ -1,4 +1,4 @@
-const api = 'http://localhost:3000/v1/api';
+const api = 'http://localhost:3366/v1/api';
 export const apiEndPoint = {
   Auth: {
     login: `${api}/login`,
@@ -7,7 +7,7 @@ export const apiEndPoint = {
   },
   Admin: {
     listUser: `${api}/admin/user`,
-    getUserById: `${api}/admin/user/:id`,
+    getUserById: `${api}/user/:id`,
     lockUser: `${api}/admin/user/:id`,
     deleteUserById: `${api}/admin/user/:id`
   },
